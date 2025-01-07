@@ -4,7 +4,7 @@ export const addExpense = async (req,res) =>{
     try{
         const { description, amount , category} = req.body;
         const done = false;
-        const userId = req.id //current logged in user id
+        const userId = req.id 
         if (!description || !amount || !category) {
             return res.status(400).json({
                 message: "All fields are required.",
@@ -31,15 +31,14 @@ export const addExpense = async (req,res) =>{
 }
 export const getAllExpense = async(req,res) => {
     try{
-        const userId = req.id;   //logged in user id
+        const userId = req.id;   
         let  category = req.query.category || "";
         const done = req.query.done || "";
 
         const query = {
-            userId //filter by userId
+            userId 
         }
         if(category.toLowerCase() === "all"){
-            //no need to filter by vategory
         }else{
             query.category = {$regex:category, $options:'i'}
         }
@@ -47,7 +46,7 @@ export const getAllExpense = async(req,res) => {
         if(done.toLowerCase() === "done"){
             query.done = true;
         }else if(done.toLowerCase() === "undone"){
-            query.done = false // filter for expense marked as pending/false
+            query.done = false 
         };
 
         const expense = await Expense.find(query);
