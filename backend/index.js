@@ -15,6 +15,7 @@ const PORT = 8000;
 app.use(express.json());
 app.use(urlencoded({extended:true}))
 
+//cors
 const corsOptions = {
     origin: "http://localhost:5173",
     credentials: true
